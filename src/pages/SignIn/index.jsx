@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import  '../../index.css';
 
-import {ForgotPasswordModal} from '../../components/ForgotPasswordModal';
+import { ForgotPasswordModal } from '../../components/ForgotPasswordModal';
+import { useAuth } from "../../hooks/auth";
+
 
 export function LoginPage() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
+    const { signIn } = useAuth();
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        // TODO: handle login logic here
+        signIn({ email, password })
     };
 
     const handleForgotPasswordClick = () => {
@@ -44,8 +49,8 @@ export function LoginPage() {
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div>
